@@ -9,7 +9,11 @@ const indexRouter = require('./routes/index');
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
-
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.use(helmet()); // https://expressjs.com/en/advanced/best-practice-security.html#use-helmet
 app.use(logger('dev'));
 app.use(express.json());

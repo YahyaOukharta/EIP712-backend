@@ -1,7 +1,6 @@
 const dotenv = require('dotenv');
 const express = require('express');
 const {ethers} = require("ethers");
-const { randomBytes } = require('ethers/lib/utils');
 
 dotenv.config();
 
@@ -44,7 +43,7 @@ router.get('/sig/:buyer', async (req, res) => {
   }
   const whitelistSigner = new ethers.Wallet(process.env.SIGNER_PK);
   const nonce = NONCE++;
-  const signedQty = 3; // 
+  const signedQty = 3; // 3 per minter 
   const signature = await whitelistSigner._signTypedData(
     {
       name: process.env.COLLECTION_NAME,
