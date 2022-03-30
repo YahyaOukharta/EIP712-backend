@@ -6,14 +6,19 @@ dotenv.config();
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.send({ message: 'Hello world' });
-});
+//router.get('/', (req, res) => {
+//  res.send({ message: 'Hello world' });
+//});
 
 ///
+const whitelist = require("../../whitelist.json").whitelist;
 const isUserWhitelisted = (buyer) => {
-  return true;
+	//return whitelist.includes(buyer)
+	return whitelist.find(element => {
+  		return element.toLowerCase() === buyer.toLowerCase();
+	}) != undefined;
 }
+
 const validateInput = () =>{
   if (
     (process.env.SIGNER_PK 
